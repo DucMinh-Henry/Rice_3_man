@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .font-body {
+    font-family: "Roboto", sans-serif;
+  }
+}
+@layer components {
+  .page-container {
+    max-width: 1440px;
+    @apply mx-auto;
+  }
+  .product-list .swiper-slide {
+    width: 272px;
+    height: auto;
+  }
+  .banner .swiper {
+    height: 100%;
+  }
+}
+// pagination
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  .selected {
+    @apply text-primary bg-secondary bg-button;
+  }
+}

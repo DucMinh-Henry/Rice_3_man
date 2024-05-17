@@ -1,0 +1,198 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Gao A",
+      "type": "A",
+      "price": 110000,
+      "description": "Gạo ST 25 là loại gạo đã đạt giải nhất trong cuộc thi World's Best Rice lần thứ XI được tổ chức tại Manila, Philippines. Cùng Bách hóa XANH theo dõi bài viết dưới đây để tìm hiểu tất tần tật thông tin về loại gạo này nhé! Tại Bách hóa XANH có bán gạo ST25 các loại với giá tốt nhất và chất lượng nhất trên thị trường.",
+      "brand": "Nha may A",
+      "slug": "gao_a",
+      "url": "https://th.bing.com/th/id/OIP.T6voFTi6SHj21hjgSejiXAAAAA?rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": 2,
+      "name": "Gao B",
+      "type": "B",
+      "price": 140000,
+      "description": "Cùng Bách hóa XANH theo dõi bài viết dưới đây để tìm hiểu tất tần tật thông tin về loại gạo này nhé! Tại Bách hóa XANH có bán gạo ST25 các loại với giá tốt nhất và chất lượng nhất trên thị trường.",
+      "brand": "Nha may B",
+      "slug": "gao_b",
+      "url": "https://th.bing.com/th/id/OIP.hx3mB769p9dforWoMkuK7wHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    },
+    {
+      "id": 3,
+      "name": "Gao C",
+      "type": "C",
+      "price": 150000,
+      "description": "",
+      "brand": "Nha may C",
+      "slug": "gao_c",
+      "url": "https://images.mango-prod.siammakro.cloud/SOURCE/a333a120de0545da8da859b4750274e3"
+    },
+    {
+      "id": 4,
+      "name": "Gao D",
+      "type": "D",
+      "price": 230000,
+      "description": "Gạo ST 25 là loại gạo đã đạt giải nhất trong cuộc thi World's Best Rice lần thứ XI được tổ chức tại Manila, Philippines. Cùng Bách hóa XANH theo dõi bài viết dưới đây để tìm hiểu tất tần tật thông tin về loại gạo này nhé! Tại Bách hóa XANH có bán gạo ST25 các loại với giá tốt nhất và chất lượng nhất trên thị trường.",
+      "brand": "Nha may D",
+      "slug": "gao_d",
+      "url": "https://th.bing.com/th/id/OIP.aUeTtRakjtJqZdLwO0ZkFwHaHa?w=1000&h=1000&rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": 5,
+      "name": "Gao E",
+      "type": "E",
+      "price": 189000,
+      "description": "Gạo ST 25 là loại gạo đã đạt giải nhất trong cuộc thi World's Best Rice lần thứ XI được tổ chức tại Manila, Philippines. Cùng Bách hóa XANH theo dõi bài viết dưới đây để tìm hiểu tất tần tật thông tin về loại gạo này nhé! Tại Bách hóa XANH có bán gạo ST25 các loại với giá tốt nhất và chất lượng nhất trên thị trường.",
+      "brand": "Nha may E",
+      "slug": "gao_e",
+      "url": "https://th.bing.com/th/id/OIP.0APzTRFdQdclf_sugpWKhAHaJ4?w=768&h=1024&rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": 6,
+      "name": "Gao F",
+      "type": "F",
+      "price": 400000,
+      "description": "Gạo ST 25 là loại gạo đã đạt giải nhất trong cuộc thi World's Best Rice lần thứ XI được tổ chức tại Manila, Philippines. Cùng Bách hóa XANH theo dõi bài viết dưới đây để tìm hiểu tất tần tật thông tin về loại gạo này nhé! Tại Bách hóa XANH có bán gạo ST25 các loại với giá tốt nhất và chất lượng nhất trên thị trường.",
+      "brand": "Nha may F",
+      "slug": "gao_f",
+      "url": "https://th.bing.com/th/id/OIP.l2jekLyW6cEp1k5Was5i2gHaHa?w=1000&h=1000&rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": 7,
+      "name": "Gao G",
+      "type": "G",
+      "price": 599000,
+      "description": "Gạo ST 25 là loại gạo đã đạt giải nhất trong cuộc thi World's Best Rice lần thứ XI được tổ chức tại Manila, Philippines. Cùng Bách hóa XANH theo dõi bài viết dưới đây để tìm hiểu tất tần tật thông tin về loại gạo này nhé! Tại Bách hóa XANH có bán gạo ST25 các loại với giá tốt nhất và chất lượng nhất trên thị trường.",
+      "brand": "Nha may G",
+      "slug": "gao_g",
+      "url": "https://lzd-img-global.slatic.net/g/p/b74f0f67516757683c782dd51d05f06b.jpg_720x720q80.jpg_.webp"
+    }
+  ],
+
+  "brands": [
+    {
+      "id": 1,
+      "name": "Cong ty A",
+      "slug": "A",
+      "url": "https://th.bing.com/th/id/OIP.vJ66xBnN-InaRG2eylG1UgHaF7?pid=ImgDet&w=179&h=143&c=7&dpr=1.3"
+    },
+    {
+      "id": 2,
+      "name": "Cong ty B",
+      "slug": "B",
+      "url": "https://th.bing.com/th/id/OIP.YHNCzSa_l4CcoptIzXe8oQHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    },
+    {
+      "id": 3,
+      "name": "Cong ty C",
+      "slug": "C",
+      "url": "https://th.bing.com/th/id/OIP.4cemG29c7HZmh5ecqXnhhAHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    },
+    {
+      "id": 4,
+      "name": "Cong ty D",
+      "slug": "D",
+      "url": "https://th.bing.com/th/id/OIP.NZNCz9bOeL0ogMdHwDrfcwAAAA?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    },
+    {
+      "id": 5,
+      "name": "Cong ty E",
+      "slug": "E",
+      "url": "https://th.bing.com/th/id/OIP.ODx6A14fvZtLUg4wSOFPaAAAAA?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    },
+    {
+      "id": 6,
+      "name": "Cong ty F",
+      "slug": "F",
+      "url": "https://th.bing.com/th/id/OIP.W_rK9U02DbWzRuTEOvxZ2gHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    },
+    {
+      "id": 7,
+      "name": "Cong ty H",
+      "slug": "H",
+      "url": "https://th.bing.com/th/id/OIP.t-nNEG15HS139cOzKKWulQHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "name": "Mùa hoa gạo vẽ lên trời sắc đỏ",
+      "url": "https://th.bing.com/th/id/OIP.W_rK9U02DbWzRuTEOvxZ2gHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Tôi vẫn thường luyến nhớ những ngày tháng ba không mùa đó. Cả những buổi trời quang nắng hay những ngày mưa bụi dầm dề, ngồi bên một quán nhỏ ven đê, chỉ ngong ngóng nhìn ra phía bờ sông rực màu hoa gạo. Hồi nhỏ không hiểu được vì sao cây gạo chỉ được trồng ở đầu làng hay cuối làng, lớn lên, đi xa, về làng trong mùa tháng ba mới ngỡ ngàng nhận ra cái màu hoa đỏ tha thiết níu mắt người không thể tách rời đó, mang trong mình một ý nghĩa sâu sắc và thiết tha đến thế: cây gạo, cây chứng nhân, cây chỉ đường đưa lối để con người ta còn nhớ chốn trở về.",
+      "author": "Tran Duc B"
+    },
+    {
+      "id": 2,
+      "name": "Tính chất của gạo Japonica mà không phải ai cũng biết",
+      "url": "https://th.bing.com/th/id/OIP.W_rK9U02DbWzRuTEOvxZ2gHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Làng tôi bên sông có một cây gạo, không biết đã có từ bao đời, cành lá xù xì, u cục nổi gò, nổi đống trông u linh, kì quái và mê hoặc. Nó là nơi bao câu chuyện ấu thơ từ đó hình thành. Lũ trẻ con mỗi mùa hoa gạo lại chỉ tập trung ở bãi cỏ rộng ngay dưới gốc nhặt hoa gạo rụng chơi đồ hàng mải mê không biết chán. Tôi, đứa trẻ ở phố về quê lúc ấy, chỉ biết ngại ngùng đón từ tay bạn những bông hoa lớn bằng bàn tay, cánh cứng nhị vàng xoay tròn như chóng chóng mỗi khi rơi xuống đất mà thích thú bồi hồi.",
+      "author": "Tran Duc C"
+    },
+    {
+      "id": 3,
+      "name": "Chế biến gạo Japonica",
+      "url": "https://th.bing.com/th/id/OIP.W_rK9U02DbWzRuTEOvxZ2gHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Sau này chưa lần nào về quê tôi gặp lại mùa hoa gạo nở. Cứ thấy luyến tiếc, nhớ nhung. Cảm giác đó hiện rõ trong tôi khi trên truyền ngược thượng nguồn sông Lam trong một ngày cuối xuân đầy nắng. Hai bên bờ sông, giữa những cánh rừng xanh tràn sức sống của ngô khoai biêng biếc, của đất váng mỡ màu là một vùng trời rực màu hoa gạo. Những gốc gạo xù xì soi mình xuống dòng sông hiền hoà và hoa gạo như trăm ngàn ánh đèn rực sáng tạo ra bức tranh thiên nhiên mùa xuân vô cùng tươi đẹp. Cái thứ hoa rực rỡ, ánh lên một sức sống diệu kì để rồi ai cũng phải thốt lên “ôi! Hoa gạo!” để rồi tự nhiên như thế, hình ảnh cây gạo đầu làng ở quê cứ tự nhiên ám ảnh hiện về.",
+      "author": "Tran Duc D"
+    },
+    {
+      "id": 4,
+      "name": "Công dụng gạo",
+      "url": "https://th.bing.com/th/id/OIP.ODx6A14fvZtLUg4wSOFPaAAAAA?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Sắc đỏ đất Cảng cứ ngỡ chỉ có tháng năm mới rợp trời hoa phượng đỏ ai hay mới có giêng hai thôi mà cũng đã đỏ trời hoa gạo. Đường về Bạch Đằng Giang (Thị trấn Minh Đức) trong sáng sớm, khi hơi xuân vẫn còn bảng lảng đợi ánh nắng hồng bừng lên thì trên những thân gạo cao vút, bạc phếch, xù xì, đầy gai, không một cọng lá đã bung nở những chùm đèn rực rỡ giữa không trung để gọi chim về véo von, lảnh lót trên những cánh tay gân guốc, khẳng khiu của mùa đông còn xót lại làm xao xuyến lòng người, níu những bước chân qua.",
+      "author": "Tran Duc E"
+    },
+    {
+      "id": 5,
+      "name": "Tìm hiểu về Gạo Lứt đỏ",
+      "url": "https://th.bing.com/th/id/OIP.NZNCz9bOeL0ogMdHwDrfcwAAAA?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Vẫn biết hoa gạo không thuộc loại cao sang quí phái. Nó chỉ thuộc hàng bình dị, dân dã của chốn quê mùa lam lũ. Thế nhưng cái sắc màu đỏ tươi, rực rỡ của từng bông hoa năm cánh cùng bầu mật ngọt ngào say đắm ấy lại hút hồn, mê luyến biết bao người trong mỗi mùa hoa và gọi về trong ta bao nỗi niềm kỉ niệm của một thời xưa cũ, khiến cho bao kẻ tha phương không khỏi thổn thức, luyến nhớ quê nhà cùng biết bao kỉ niệm của một thời niên thiếu được mặc sức chơi đùa, nhặt hoa, gom lá bên những gốc gạo quê hương.",
+      "author": "Tran Duc F"
+    },
+    {
+      "id": 6,
+      "name": "Thành phần và giá trị dinh dưỡng của Gạo Lứt đỏ",
+      "url": "https://th.bing.com/th/id/OIP.4cemG29c7HZmh5ecqXnhhAHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Hoa gạo đỏ tươi. Đỏ như màu máu, rực như ngọn lửa đang đua nhau bung nở, thắp lên trên khắp những thân cành của gầy guộc, xương xẩu. Hàng trăm hàng ngàn bông hoa ken, kết bên nhau như thể đang tạo thành một quầng đỏ khổng lồ với hàng trăm hàng nghìn ngọn đuốc dương thẳng lên trời xanh để thiêu đốt, xua tan cái u ám của tiết trời mùa đông còn vương lại để gọi hè về với những tia nắng chói chang, rực rỡ. Nhớ lại, thời xưa, có lần ông tôi bảo hoa gạo là hoa báo mùa. ",
+      "author": "Tran Duc G"
+    },
+    {
+      "id": 7,
+      "name": "Giá trị dinh dưỡng của Gạo Lứt đỏ",
+      "url": "https://th.bing.com/th/id/OIP.vJ66xBnN-InaRG2eylG1UgHaF7?pid=ImgDet&w=179&h=143&c=7&dpr=1.3",
+      "description": "Phải nói, hoa gạo có một sức hút lạ kỳ. Tôi chưa thấy ai bày hoa gạo trong nhà bao giờ nhưng tôi đã nhìn thấy rất nhiều bạn gái từng say mê ngắm nhìn một cách thích thú những chùm hoa đỏ rực trên cây hay những nữ sinh thơ thẩn tìm nhặt những bông hoa gạo để mân mê ngắm nghía hay ép sổ, cài đầu đùa nghịch. Chẳng phải ngày xưa mà bây giờ vẫn vậy. Mỗi khi có cơ hội được trông thấy gốc gạo rực đỏ màu hoa như đốt trời ấy đã có không ít cô nàng reo lên sung sướng để thỏa thuê ngắm nhìn hay mặc sức tạo dáng chụp hình lưu giữ những khoảnh khắc xuân thì tươi trẻ dưới những gốc gạo đỏ hoa như rực lửa.",
+      "author": "Tran Duc H"
+    },
+    {
+      "id": 8,
+      "name": "Thành phần và giá trị dinh dưỡng của Gạo Lứt đỏ",
+      "url": "https://th.bing.com/th/id/OIP.4cemG29c7HZmh5ecqXnhhAHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Hoa gạo đỏ tươi. Đỏ như màu máu, rực như ngọn lửa đang đua nhau bung nở, thắp lên trên khắp những thân cành của gầy guộc, xương xẩu. Hàng trăm hàng ngàn bông hoa ken, kết bên nhau như thể đang tạo thành một quầng đỏ khổng lồ với hàng trăm hàng nghìn ngọn đuốc dương thẳng lên trời xanh để thiêu đốt, xua tan cái u ám của tiết trời mùa đông còn vương lại để gọi hè về với những tia nắng chói chang, rực rỡ. Nhớ lại, thời xưa, có lần ông tôi bảo hoa gạo là hoa báo mùa. ",
+      "author": "Tran Duc I"
+    },
+    {
+      "id": 9,
+      "name": "Giá trị dinh dưỡng của Gạo Lứt đỏ",
+      "url": "https://th.bing.com/th/id/OIP.vJ66xBnN-InaRG2eylG1UgHaF7?pid=ImgDet&w=179&h=143&c=7&dpr=1.3",
+      "description": "Phải nói, hoa gạo có một sức hút lạ kỳ. Tôi chưa thấy ai bày hoa gạo trong nhà bao giờ nhưng tôi đã nhìn thấy rất nhiều bạn gái từng say mê ngắm nhìn một cách thích thú những chùm hoa đỏ rực trên cây hay những nữ sinh thơ thẩn tìm nhặt những bông hoa gạo để mân mê ngắm nghía hay ép sổ, cài đầu đùa nghịch. Chẳng phải ngày xưa mà bây giờ vẫn vậy. Mỗi khi có cơ hội được trông thấy gốc gạo rực đỏ màu hoa như đốt trời ấy đã có không ít cô nàng reo lên sung sướng để thỏa thuê ngắm nhìn hay mặc sức tạo dáng chụp hình lưu giữ những khoảnh khắc xuân thì tươi trẻ dưới những gốc gạo đỏ hoa như rực lửa.",
+      "author": "Tran Duc K"
+    },
+    {
+      "id": 10,
+      "name": "Thành phần và giá trị dinh dưỡng của Gạo Lứt đỏ",
+      "url": "https://th.bing.com/th/id/OIP.4cemG29c7HZmh5ecqXnhhAHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3",
+      "description": "Hoa gạo đỏ tươi. Đỏ như màu máu, rực như ngọn lửa đang đua nhau bung nở, thắp lên trên khắp những thân cành của gầy guộc, xương xẩu. Hàng trăm hàng ngàn bông hoa ken, kết bên nhau như thể đang tạo thành một quầng đỏ khổng lồ với hàng trăm hàng nghìn ngọn đuốc dương thẳng lên trời xanh để thiêu đốt, xua tan cái u ám của tiết trời mùa đông còn vương lại để gọi hè về với những tia nắng chói chang, rực rỡ. Nhớ lại, thời xưa, có lần ông tôi bảo hoa gạo là hoa báo mùa. ",
+      "author": "Tran Duc L"
+    },
+    {
+      "id": 11,
+      "name": "Giá trị dinh dưỡng của Gạo Lứt đỏ",
+      "url": "https://th.bing.com/th/id/OIP.vJ66xBnN-InaRG2eylG1UgHaF7?pid=ImgDet&w=179&h=143&c=7&dpr=1.3",
+      "description": "Phải nói, hoa gạo có một sức hút lạ kỳ. Tôi chưa thấy ai bày hoa gạo trong nhà bao giờ nhưng tôi đã nhìn thấy rất nhiều bạn gái từng say mê ngắm nhìn một cách thích thú những chùm hoa đỏ rực trên cây hay những nữ sinh thơ thẩn tìm nhặt những bông hoa gạo để mân mê ngắm nghía hay ép sổ, cài đầu đùa nghịch. Chẳng phải ngày xưa mà bây giờ vẫn vậy. Mỗi khi có cơ hội được trông thấy gốc gạo rực đỏ màu hoa như đốt trời ấy đã có không ít cô nàng reo lên sung sướng để thỏa thuê ngắm nhìn hay mặc sức tạo dáng chụp hình lưu giữ những khoảnh khắc xuân thì tươi trẻ dưới những gốc gạo đỏ hoa như rực lửa.",
+      "author": "Tran Duc M"
+    }
+  ]
+}
