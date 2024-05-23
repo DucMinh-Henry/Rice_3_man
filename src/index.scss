@@ -2,11 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+  background-color: #f1e8d7;
+}
+
+html {
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
 @layer base {
   .font-body {
     font-family: "Roboto", sans-serif;
   }
 }
+
 @layer components {
   .page-container {
     max-width: 1440px;
@@ -29,4 +38,60 @@
   .selected {
     @apply text-primary bg-secondary bg-button;
   }
+}
+
+//
+.custom-element {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #fdc97d;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  transform: rotate(45deg);
+}
+
+//
+.line-clamp-2 {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.line-clamp-3 {
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-height: 18px;
+}
+
+//
+.back-top {
+  position: fixed;
+  bottom: 100px;
+  right: 15px;
+  z-index: 99;
+  top: auto;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  text-decoration: none;
+  transition: all 0.3s ease-out 0s;
+  transform: translateY(-20px);
+}
+
+.beginning-page {
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  border: 3px solid #007033;
+  transform: rotate(-45deg);
+  background-color: #fff;
+}
+
+.beginning-page:hover {
+  border: 2px solid #fdc97d;
 }

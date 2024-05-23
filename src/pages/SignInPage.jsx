@@ -68,13 +68,17 @@ const SignInPage = () => {
             ></IconEyeToggle>
           </Input>
         </FormGroup>
-        <Button
-          type="submit"
-          kind="button"
-          className="w-full py-3 rounded-md text-xl font-medium"
-        >
-          Đăng nhập
-        </Button>
+        <div className="flex items-center justify-center w-full">
+          <Button
+            type="submit"
+            kind="button"
+            className="flex text-xl font-medium items-center p-1 bg-[#053024] hover:bg-[#fdc97d] hover:text-[#053024]"
+          >
+            <span className="px-3 py-1 border border-solid border-white hover:border-[#053024]">
+              Đăng nhập
+            </span>
+          </Button>
+        </div>
       </form>
     </LayoutAuthentication>
   );

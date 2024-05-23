@@ -70,7 +70,7 @@ const AccountUpdatePage = () => {
   } = useToggleValue();
   return (
     <div className="page-container flex justify-center items-center mb-10">
-      <div className="w-[80%]">
+      <div className="w-[80%] bg-white">
         <div className="flex text-2xl text-center mb-10">
           <Link
             className="w-full py-2 px-5 border-b rounded-t-md"
@@ -149,13 +149,17 @@ const AccountUpdatePage = () => {
               ></IconEyeToggle>
             </Input>
           </FormGroup>
-          <Button
-            type="button"
-            kind="button"
-            className="px-10 py-3 rounded-lg m-auto"
-          >
-            Lưu
-          </Button>
+          <div className="flex items-center justify-center gap-3 w-full">
+            <Button
+              type="button"
+              kind="button"
+              className="flex items-center justify-center text-lg font-semibold p-1 bg-[#053024] hover:bg-[#fdc97d] hover:text-[#053024]"
+            >
+              <span className="px-10 py-1 border border-solid border-white hover:border-[#053024]">
+                Lưu
+              </span>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

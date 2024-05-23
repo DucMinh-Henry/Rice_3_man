@@ -18,14 +18,11 @@ const LayoutAuthentication = (props) => {
   }, [user]);
   if (user && user.email) return null;
   return (
-    <div className="relative w-full min-h-screen p-10 bg-button">
-      <Link
-        to="/"
-        className="inline-block mb-5 lg:mb-16 bg-secondary rounded-lg"
-      >
+    <div className="relative w-full min-h-screen p-10">
+      <Link to="/" className="inline-block mb-5 lg:mb-16 rounded-lg">
         <IconLogo></IconLogo>
       </Link>
-      <div className="w-full max-w-[556px] bg-white rounded-xl px-5 py-8 lg:px-16 py-12 mx-auto">
+      <div className="w-full max-w-[556px] bg-white shadow-xl rounded-xl px-5 lg:px-16 py-12 mx-auto">
         <h1 className="text-3xl font-semibold text-center mb-5">{heading}</h1>
         {children}
       </div>

@@ -7,22 +7,24 @@ const PostCard = ({ item }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#FADAB3] rounded-lg p-3 max-h-[450px]">
+    <div className="bg-[#fff] rounded-lg p-3 max-h-[450px]">
       <img className="rounded-lg mb-3 h-[280px]" src={url} alt="" />
       <p className="text-xl font-semibold overflow-hidden whitespace-nowrap text-ellipsis">
         {name}
       </p>
-      <p className="overflow-hidden h-[3.6rem] text-base leading-[1.2rem] text-ellipsis">
-        {description}
-      </p>
-      <div className="flex items-center justify-center">
+      <p className="line-clamp-3 h-14">{description}</p>
+      <div className="flex items-center justify-center my-3">
         <Button
           type="button"
           kind="button"
-          className="mt-3 px-3 py-1 rounded-md"
-          onClick={() => navigate(`/post/${id}`)}
+          className="flex items-center justify-center text-lg font-semibold p-1 bg-[#053024] hover:bg-[#fdc97d] hover:text-[#053024]"
+          onClick={() => {
+            navigate(`/post/${id}`);
+          }}
         >
-          Đọc tiếp
+          <span className="px-2 border border-solid border-white hover:border-[#053024]">
+            Đọc tiếp
+          </span>
         </Button>
       </div>
     </div>

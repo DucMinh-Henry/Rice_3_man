@@ -17,10 +17,13 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        primary: ["Epilogue", "sans-serif"],
+      },
       colors: {
         primary: "#FF0000",
-        secondary: "#FADAB3",
-        button: "#FF6E8C",
+        secondary: "#007033",
+        button: "#007033",
         text1: "#171725",
         text2: "#4B5264",
         text3: "#808191",
@@ -39,6 +42,10 @@ module.exports = {
         darkSoft: "#24242C",
         darkStroke: "#3A3A43",
         darkRed: "#422C32",
+      },
+      boxShadow: {
+        custom:
+          "0px 0px 6px 0px rgba(50, 50, 93, 0.15), 1px 1px 5px rgba(0, 0, 0, 0.05)",
       },
     },
   },

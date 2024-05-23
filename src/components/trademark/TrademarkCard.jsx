@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 const TrademarkCard = ({ item }) => {
   const { id, name, slug, url } = item || {};
   return (
-    <div className="bg-[#FADAB3] rounded-lg flex flex-col justify-center items-center">
+    <div className="bg-[#fff] flex flex-col justify-center items-center">
       <img
-        className="p-5 rounded-md min-w-[272px] min-h-[274px] object-cover"
+        className="p-5 min-w-[272px] min-h-[274px] object-cover"
         src={url}
         alt=""
       />

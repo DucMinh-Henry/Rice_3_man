@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const AccountDeletePage = () => {
   return (
     <div className="page-container flex justify-center items-center mb-10">
-      <div className="w-[80%]">
+      <div className="w-[80%] bg-white">
         <div className="flex text-2xl text-center mb-10">
           <Link
             className="w-full py-2 px-5 border-b rounded-t-md"
@@ -21,7 +21,7 @@ const AccountDeletePage = () => {
           </Link>
           <Link
             className="w-full py-2 px-5 mx-auto border border-b-transparent rounded-t-md"
-            to={"/deleteAccount"}
+            to={"/admin/profile-delete"}
           >
             <span>Xóa tài khoản</span>
           </Link>
@@ -34,9 +34,11 @@ const AccountDeletePage = () => {
           <Button
             type="button"
             kind="button"
-            className="px-10 py-3 rounded-lg mt-5"
+            className="mt-10 flex items-center justify-center text-lg font-semibold p-1 bg-[#053024] hover:bg-[#fdc97d] hover:text-[#053024]"
           >
-            XÓA TÀI KHOẢN
+            <span className="px-1 border border-solid border-white hover:border-[#053024]">
+              XÓA TÀI KHOẢN
+            </span>
           </Button>
         </div>
       </div>

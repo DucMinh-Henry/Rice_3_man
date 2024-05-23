@@ -1,42 +1,74 @@
+import React, { useState } from "react";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export function PaginationDemo() {
+const PaginationDemo = ({ dataBase, currentPage, onPageChange }) => {
+  const [newsPerPage, setNewsPerPage] = useState(5);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(dataBase.length / newsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  // console.log(Math.ceil(dataBase.length / newsPerPage));
+
+  const choosePage = (pageNumber) => {
+    onPageChange(pageNumber);
+  };
+
+  const nextPage = () => {
+    onPageChange(currentPage + 1);
+  };
+
+  const previousPage = () => {
+    onPageChange(currentPage - 1);
+  };
+  // console.log(currentPage);
   return (
     <Pagination>
-      <PaginationContent className={"flex justify-center items-center"}>
+      <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious
+            onClick={previousPage}
+            disabled={currentPage === 1}
+            aria-label="Previous Page"
+            className={
+              currentPage === 1
+                ? "opacity-50 pointer-events-none"
+                : "cursor-pointer"
+            }
+          />
         </PaginationItem>
+        {pageNumbers.map((number) => (
+          <PaginationItem key={number} onClick={() => choosePage(number)}>
+            <PaginationLink
+              className={currentPage === number ? "bg-button text-white" : ""}
+              href={`#${number}`}
+            >
+              {number}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            href="#"
-            isActive
-            className={"bg-[#FF8E00] text-white"}
-          >
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext
+            onClick={() => nextPage()}
+            disabled={currentPage === Math.ceil(dataBase.length / newsPerPage)}
+            aria-label="Next Page"
+            className={
+              currentPage === Math.ceil(dataBase.length / newsPerPage)
+                ? "opacity-50 pointer-events-none"
+                : "cursor-pointer"
+            }
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
-}
+};
+
+export default PaginationDemo;
