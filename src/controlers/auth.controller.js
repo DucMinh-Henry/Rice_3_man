@@ -1,18 +1,11 @@
 const jwt = require("jsonwebtoken");
-const express = require("express");
-const app = express();
-app.use(express.json());
 const bcrypt = require("bcrypt");
-const connectdatabase = require("./src/config/database"); // Import database connection
-const verifyToken = require("./src/middleware/auth");
-const cors = require("cors");
-
-app.use(cors());
+const connectdatabase = require("../config/database"); // Import database connection
 
 const generateTokens = (payload) => {
   const { id, name } = payload;
   const accessToken = jwt.sign({ id, name }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "5m",
+    expiresIn: "1d",
   });
   const refreshToken = jwt.sign(
     { id, name },
@@ -29,8 +22,8 @@ async function updateRefreshToken(name, refreshToken) {
   try {
     await connectdatabase.query(
       `
-      UPDATE rice_4_man.users SET refreshToken = ? WHERE name = ?;
-    `,
+        UPDATE rice_4_man.users SET refreshToken = ? WHERE name = ?;
+      `,
       [refreshToken, name]
     );
   } catch (error) {
@@ -39,17 +32,17 @@ async function updateRefreshToken(name, refreshToken) {
   }
 }
 
-app.get("/me", verifyToken, async (req, res) => {
+const getUserJson = async (req, res) => {
   // console.log("hihi", req);
   try {
     const [user] = await connectdatabase.query(
       `
-      SELECT * FROM rice_4_man.users WHERE id = ?;
-    `,
+        SELECT * FROM rice_4_man.users WHERE id = ?;
+      `,
       [req.userId]
     );
 
-    // console.log("huhu", user);
+    console.log("user: ", user);
 
     if (!user) return res.sendStatus(401);
     res.json(user[0]);
@@ -59,14 +52,14 @@ app.get("/me", verifyToken, async (req, res) => {
       .status(500)
       .json({ error: "Đã xảy ra lỗi khi lấy thông tin người dùng" });
   }
-});
+};
 
-app.post("/auth/login", async (req, res) => {
+const postUserLogin = async (req, res) => {
   const { email, password } = req.body;
   const users = await connectdatabase.query(
     `
-      SELECT * FROM rice_4_man.users;
-    `,
+        SELECT * FROM rice_4_man.users;
+      `,
     [email]
   );
   const user = users[0].find((user) => {
@@ -98,19 +91,19 @@ app.post("/auth/login", async (req, res) => {
     await updateRefreshToken(user.name, tokens.refreshToken);
     res.json(tokens);
   });
-});
+};
 
-app.post("/token", async (req, res) => {
+const postToken = async (req, res) => {
   const refreshToken = req.body.refreshToken;
   if (!refreshToken) return res.sendStatus(401);
   try {
     const user = await connectdatabase.query(
       `
-      SELECT * FROM rice_4_man.users WHERE refreshToken = ?;
-    `,
+        SELECT * FROM rice_4_man.users WHERE refreshToken = ?;
+      `,
       [refreshToken]
     );
-    if (!user || !user.length) return res.sendStatus(403);
+    if (!user) return res.sendStatus(403);
     jwt.verify(
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET,
@@ -125,17 +118,17 @@ app.post("/token", async (req, res) => {
     console.error("Lỗi khi tạo token mới:", error);
     res.sendStatus(500);
   }
-});
+};
 
-app.post("/auth/register", async (req, res) => {
+const postUserRegister = async (req, res) => {
   const { name, password, email } = req.body;
   const currentDate = new Date();
   try {
     // Kiểm tra xem người dùng đã tồn tại trong cơ sở dữ liệu chưa
     const [existingUser] = await connectdatabase.query(
       `
-      SELECT count(*) as count FROM rice_4_man.users WHERE email = ?;
-    `,
+        SELECT count(*) as count FROM rice_4_man.users WHERE email = ?;
+      `,
       [email]
     );
     console.log("check exits email", existingUser[0]);
@@ -156,8 +149,8 @@ app.post("/auth/register", async (req, res) => {
       try {
         await connectdatabase.query(
           `
-          INSERT INTO rice_4_man.users ( name, password, email, created_at) VALUES (?, ?, ?, ?);
-        `,
+            INSERT INTO rice_4_man.users ( name, password, email, created_at) VALUES (?, ?, ?, ?);
+          `,
           [name, hash, email, currentDate]
         );
         res.sendStatus(201);
@@ -174,15 +167,50 @@ app.post("/auth/register", async (req, res) => {
       .status(500)
       .json({ error: "Đã xảy ra lỗi khi đăng ký người dùng" + error.message });
   }
-});
+};
 
-app.delete("/logout", verifyToken, async (req, res) => {
+const updatePassword = async (req, res) => {
+  const { currentPassword, newPassword, idUser } = req.body;
+
+  try {
+    // Retrieve user from database
+    const [user] = await connectdatabase.query(
+      `SELECT * FROM rice_4_man.users WHERE id = ?`,
+      [idUser]
+    );
+    if (!user || !user.length) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const dbPassword = user[0].password;
+
+    // Compare current password with stored hash
+    const match = await bcrypt.compare(currentPassword, dbPassword);
+    if (!match) {
+      return res.status(403).json({ error: "Current password is incorrect" });
+    }
+
+    // Hash new password and update in database
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    await connectdatabase.query(
+      `UPDATE rice_4_man.users SET password = ? WHERE id = ?;`,
+      [hashedNewPassword, idUser]
+    );
+
+    res.sendStatus(204);
+  } catch (error) {
+    console.error("Error updating password:", error);
+    res.status(500).json({ error: "Error updating password" });
+  }
+};
+
+const deleteLogout = async (req, res) => {
   try {
     // Lấy thông tin người dùng từ cơ sở dữ liệu
     const user = await connectdatabase.query(
       `
-      SELECT * FROM rice_4_man.users WHERE id = ?;
-    `,
+        SELECT * FROM rice_4_man.users WHERE id = ?;
+      `,
       [req.userId]
     );
 
@@ -198,8 +226,13 @@ app.delete("/logout", verifyToken, async (req, res) => {
     console.error("Lỗi khi đăng xuất người dùng:", error);
     res.status(500).json({ error: "Đã xảy ra lỗi khi đăng xuất người dùng" });
   }
-});
+};
 
-// Các route khác
-
-app.listen(5001, () => console.log("Server auth started on port 5001"));
+module.exports = {
+  getUserJson,
+  postUserLogin,
+  postToken,
+  postUserRegister,
+  updatePassword,
+  deleteLogout,
+};
