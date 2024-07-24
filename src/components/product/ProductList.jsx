@@ -1,35 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SwiperSlide, Swiper } from "swiper/react";
-import useSWR from "swr";
-import { dbAPI, fetcher } from "../aipConfig/config";
 import ProductCard from "./ProductCard";
-import { Cart } from "../context/CartContext";
+import { CartData } from "../context/CartContext";
+import axios from "@/api/axios";
 
-const ProductList = ({ type = "products" }) => {
-  const { data, error } = useSWR(dbAPI.getdataList(type), fetcher);
-  // const isLoading = !data && !error;
-  // console.log(data);
-  const products = data || [];
-  // console.log(products);
-
-  // Add to cart
-  const { cart, setCart } = useContext(Cart);
-  // console.log(cart);
-  // console.log(useContext(Cart));
+const ProductList = () => {
+  const [productData, setProductData] = useState([]);
+  const { cart, setCart } = CartData();
+  // Get data
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8888/product`);
+        setProductData(response.data.ListProduct);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProduct();
+  }, []);
 
   return (
-    <Swiper grabCursor={"true"} spaceBetween={20} slidesPerView={"auto"}>
-      {products.length > 0 &&
-        products.map((item) => (
-          <SwiperSlide key={item.id}>
-            <ProductCard
-              item={item}
-              cart={cart}
-              setCart={setCart}
-              key={item.id}
-            ></ProductCard>
-          </SwiperSlide>
-        ))}
+    <Swiper grabCursor={true} spaceBetween={20} slidesPerView={"auto"}>
+      {productData.map((item, index) => (
+        <SwiperSlide key={index}>
+          <ProductCard item={item} cart={cart} setCart={setCart}></ProductCard>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };

@@ -1,26 +1,14 @@
-import Button from "@/components/button/Button";
 import FormGroup from "@/components/common/FormGroup";
-import Input from "@/components/input/input";
-import { Label } from "@/components/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const AccountInfoPage = ({ user }) => {
   const { control } = useForm();
-  const [avatar, setAvatar] = useState(user ? user.avatar : "");
 
-  // Function to handle file change
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    // You may want to perform validation on the file here
-    // For now, let's assume it's a valid image file
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setAvatar(reader.result);
-    };
-  };
   return (
     <div className="page-container flex justify-center items-center mb-10">
       <div className="w-[80%] bg-white">
@@ -61,7 +49,7 @@ const AccountInfoPage = ({ user }) => {
               type="file"
               name="file"
               accept="image/*"
-              onChange={handleFileChange}
+              // onChange={}
               autoFocus
               autoComplete="avatar"
             ></Input>

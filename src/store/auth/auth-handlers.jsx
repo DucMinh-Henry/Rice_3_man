@@ -1,23 +1,24 @@
 import { toast } from "react-toastify";
 import { call, put } from "redux-saga/effects";
+import { logOut, saveToken } from "@/utils/auth";
 import {
   requestAuthFetchMe,
   requestAuthLogin,
   requestAuthRefreshToken,
   requestAuthRegister,
+  // requestAuthUpdatePassword,
 } from "./auth-requests";
 import { authUpdateUser } from "./auth-slice";
-import { logOut, saveToken } from "@/utils/auth";
 
 export default function* handleAuthRegister(action) {
   const { payload } = action;
   try {
     const response = yield call(requestAuthRegister, payload);
     if (response.status === 201) {
-      toast.success("Created new account successfully");
+      toast.success("Tạo tài khoản thành công");
     }
   } catch (error) {
-    console.log(error);
+    toast.error("Tạo tài khoản thất bại");
   }
 }
 function* handleAuthLogin({ payload }) {
@@ -29,9 +30,11 @@ function* handleAuthLogin({ payload }) {
     }
   } catch (error) {
     const response = error.response.data;
-    if (response.statusCode === 403) {
+    if (response.statusCode === 401 || response.statusCode === 403) {
       toast.error(response.error.message);
       return;
+    } else {
+      toast.error("Đã có lỗi xảy ra. Vui lòng thử lại.");
     }
   }
 }
@@ -54,6 +57,7 @@ function* handleAuthFetchMe({ payload }) {
 function* handleAuthRefreshToken({ payload }) {
   try {
     const response = yield call(requestAuthRefreshToken, payload);
+    // console.log(response);
     if (response.data) {
       saveToken(response.data.accessToken, response.data.refreshToken);
       yield call(handleAuthFetchMe, {
@@ -75,9 +79,24 @@ function* handleAuthLogOut() {
   logOut();
 }
 
+// function* handleAuthUpdatePassword({ payload }) {
+//   try {
+//     const { currentPassword, newPassword, token } = payload;
+//     yield call(
+//       requestAuthUpdatePassword,
+//       { currentPassword, newPassword },
+//       token
+//     );
+//     toast.success("Mật khẩu đã được cập nhật thành công");
+//   } catch (error) {
+//     toast.error("Đã có lỗi xảy ra khi cập nhật mật khẩu");
+//   }
+// }
+
 export {
   handleAuthLogin,
   handleAuthFetchMe,
   handleAuthRefreshToken,
   handleAuthLogOut,
+  // handleAuthUpdatePassword,
 };

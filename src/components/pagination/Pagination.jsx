@@ -8,13 +8,15 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const PaginationDemo = ({ dataBase, currentPage, onPageChange }) => {
-  const [newsPerPage, setNewsPerPage] = useState(5);
+const PaginationDemo = ({ dataBase, currentPage, onPageChange, PerPage }) => {
+  const [newsPerPage, setNewsPerPage] = useState(PerPage);
 
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(dataBase.length / newsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  // console.log(pageNumbers);
   // console.log(Math.ceil(dataBase.length / newsPerPage));
 
   const choosePage = (pageNumber) => {

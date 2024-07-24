@@ -1,6 +1,6 @@
-import TableBill from "@/components/adminDashboard/TableBill";
 import TitleContent from "@/components/titleContent/TitleContent";
 import React from "react";
+import TableBill from "./TableBill";
 
 const BillPage = () => {
   return (

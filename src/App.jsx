@@ -1,9 +1,7 @@
-// App.js
+import { useDispatch, useSelector } from "react-redux";
+import { Fragment, Suspense, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import {
-  Fragment,
-  Suspense,
-  Route,
-  Routes,
   Main,
   MainDashboard,
   HomePage,
@@ -35,8 +33,34 @@ import {
   AccountDeleteAdmin,
   ScrollToTop,
 } from "./imports";
+import { authRefreshToken, authUpdateUser } from "./store/auth/auth-slice";
+import { getToken, logOut } from "./utils/auth";
+import ProtectRoute from "./routes/ProtectRoute";
 
 function App() {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user && user.id) {
+      const { access_token } = getToken();
+      // console.log("useEffect ~ access_token:", access_token);
+      dispatch(
+        authUpdateUser({
+          user: user,
+          accessToken: access_token,
+        })
+      );
+    } else {
+      const { refresh_token } = getToken();
+      if (refresh_token) {
+        dispatch(authRefreshToken(refresh_token));
+      } else {
+        dispatch(authUpdateUser({}));
+        logOut();
+      }
+    }
+  }, [dispatch, user]);
+
   return (
     <Fragment>
       <ScrollToTop />
@@ -59,6 +83,7 @@ function App() {
             <Route path="/deleteAccount" element={<AccountDeletePage />} />
           </Route>
           <Route path="/payment" element={<PaymentPage />} />
+          {/* <Route path="/admin" element={<ProtectRoute roles={[1]} />}> */}
           <Route element={<MainDashboard />}>
             <Route path="/admin/dashboard" element={<DashboardPage />} />
             <Route path="/admin/product-type" element={<ProductTypePage />} />
@@ -91,6 +116,7 @@ function App() {
               element={<AccountDeleteAdmin />}
             />
           </Route>
+          {/* </Route> */}
         </Routes>
       </Suspense>
     </Fragment>

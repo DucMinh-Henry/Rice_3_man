@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "swiper/scss";
 import iconPolicy from "public/svg/policy_round.svg";
 import iconFreeDelivery from "public/svg/free_delivery.svg";
@@ -6,40 +6,51 @@ import iconPublished from "public/svg/published.svg";
 import iconPhone from "public/svg/phone.svg";
 import iconDiscount from "public/svg/discount.svg";
 import ProductList from "@/components/product/ProductList";
-import useSWR from "swr";
-import { dbAPI, fetcher } from "@/components/aipConfig/config";
 import { useParams } from "react-router-dom";
 import IconCart from "@/components/icons/IconCart";
 import IconMinus from "@/components/icons/IconMinus";
 import IconPlus from "@/components/icons/IconPlus";
 import Button from "@/components/button/Button";
-import { Cart } from "@/components/context/CartContext";
+import { CartData } from "@/components/context/CartContext";
+import axios from "@/api/axios";
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
-  const { data, error } = useSWR(dbAPI.getProductDetails(productId), fetcher);
+  const [productData, setProductData] = useState([]);
   const [number, setNumber] = useState(1);
-  const { cart, setCart } = useContext(Cart);
+  const { cart, setCart } = CartData();
 
+  // Get data
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const productResponse = await axios.get(
+          `http://localhost:8888/product/id/${productId}`
+        );
+        setProductData(productResponse.data.ProductID);
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      }
+    };
+
+    fetchProductData();
+  }, [productId]);
+
+  // console.log(productData);
   // Format the price to VND using the locale, style, and currency.
   const VNDDong = new Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
   });
 
-  if (error) return <div>Error loading product details.</div>;
-  if (!data) return <div>Loading...</div>;
-
-  const { id, name, price, url } = data;
-
   const handleAddToCart = () => {
-    const existingItem = cart.find((item) => item.id === id);
+    const existingItem = cart.find(
+      (item) => item.idProduct === productData.idProduct
+    );
     if (!existingItem) {
       setCart([...cart, { ...data, quantity: number }]);
     }
   };
-
-  console.log(cart);
 
   return (
     <div className="page-container">
@@ -47,24 +58,26 @@ const ProductDetailsPage = () => {
         <div className="col-span-6">
           <div className="flex gap-5">
             <img
-              src={url}
-              alt={name}
+              src={productData.urlImage}
+              alt={productData.nameProduct}
               className="rounded-lg object-cover w-[250px]"
             />
             <div className="flex flex-col justify-between w-full bg-white rounded-md gap-5 p-5">
               <div className="flex flex-col justify-between leading-8">
-                <h2 className="font-semibold text-lg">{name}</h2>
+                <h2 className="font-semibold text-lg">
+                  {productData.nameProduct}
+                </h2>
                 <div className="flex gap-2">
                   <span>Tình trạng:</span>
                   <span className="text-primary">Còn hàng</span>
                 </div>
                 <div className="flex gap-2">
                   <span>Mã sản phẩm:</span>
-                  <span className="text-primary">{id}</span>
+                  <span className="text-primary">{productData.idProduct}</span>
                 </div>
               </div>
               <span className="text-primary text-2xl font-bold">
-                {VNDDong.format(price)}
+                {VNDDong.format(productData.price)}
               </span>
               <div className="flex items-center gap-2">
                 <span>Số lượng:</span>
@@ -99,7 +112,7 @@ const ProductDetailsPage = () => {
                 <Button
                   className="p-1 px-full bg-button text-white hover:bg-[#fdc97d] hover:text-[#053024]"
                   onClick={handleAddToCart}
-                  // href={"/payment"}
+                  href={"/payment"}
                 >
                   <span className="text-lg font-semibold w-full px-3 flex gap-10 justify-center items-center border border-solid border-white hover:border-[#053024]">
                     Mua ngay

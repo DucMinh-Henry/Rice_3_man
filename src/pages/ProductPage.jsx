@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import ProductCard from "@/components/product/ProductCard";
-import useSWR from "swr";
-import { dbAPI, fetcher } from "@/components/aipConfig/config";
 import PaginationDemo from "@/components/pagination/Pagination";
+import axios from "@/api/axios";
 
 const priceRanges = [
   {
@@ -22,24 +21,51 @@ const priceRanges = [
   },
 ];
 
-const ProductPage = ({ type = "products" }) => {
-  const [selectedPriceRange, setSelectedPriceRange] = useState([]);
-  const [sortOption, setSortOption] = useState("comfortable");
-  const { data, error } = useSWR(dbAPI.getdataList(type), fetcher);
-  const productsData = data || [];
-
-  // handle next page
+const ProductPage = () => {
+  const [productData, setProductData] = useState([]);
+  const [typeData, setTypeData] = useState([]);
+  const [tempProductData, setTempProductData] = useState([]);
+  const [selectedType, setSelectedType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [newsPerPage, setNewsPerPage] = useState(8);
-  const indexOfLastItem = currentPage * newsPerPage;
-  const indexOfFirstItem = indexOfLastItem - newsPerPage;
-  const currentProductsData = productsData.slice(
-    indexOfFirstItem,
-    indexOfLastItem
+  const [selectedPriceRange, setSelectedPriceRange] = useState(
+    priceRanges[0].range
   );
+  const [sortOption, setSortOption] = useState("comfortable");
+  const [newsPerPage, setNewsPerPage] = useState(8);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  // Get data
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const productResponse = await axios.get(
+          `http://localhost:8888/product`
+        );
+        setProductData(productResponse.data.ListProduct);
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      }
+    };
+
+    const fetchTypeData = async () => {
+      try {
+        const typeResponse = await axios.get(`http://localhost:8888/type`);
+        setTypeData(typeResponse.data.Type);
+      } catch (error) {
+        console.error("Error fetching type data:", error);
+      }
+    };
+
+    fetchProductData();
+    fetchTypeData();
+  }, []);
+
+  // Handle choose type product
+  const handleChooseType = (id) => {
+    setSelectedType(id);
+    const newProductData = productData.filter(
+      (item) => item.ProductType_idType === id
+    );
+    setTempProductData(newProductData);
   };
 
   useEffect(() => {
@@ -48,8 +74,9 @@ const ProductPage = ({ type = "products" }) => {
     }
   }, []);
 
-  if (error) return <div>Failed to load data</div>;
-  if (!data) return <div>Loading...</div>;
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const handlePriceRangeChange = (range) => {
     setSelectedPriceRange(range);
@@ -59,7 +86,13 @@ const ProductPage = ({ type = "products" }) => {
     setSortOption(value);
   };
 
-  const filteredProducts = currentProductsData.filter((product) => {
+  // handle next page
+  const indexOfLastItem = currentPage * newsPerPage;
+  const indexOfFirstItem = indexOfLastItem - newsPerPage;
+
+  // check select product type
+  const productsToShow = selectedType ? tempProductData : productData;
+  const filteredProducts = productsToShow.filter((product) => {
     const [min, max] = selectedPriceRange;
     if (selectedPriceRange.length === 0) return true;
     return product.price >= min && product.price <= max;
@@ -80,30 +113,44 @@ const ProductPage = ({ type = "products" }) => {
     }
   });
 
+  const currentProductsData = sortedProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
   return (
-    <div className="page-container flex flex-col justify-center items-center">
+    <div className="page-container flex flex-col">
       <div className="grid grid-cols-10 gap-5 mb-10">
         <div className="grid col-start-1 col-end-3">
           <div className="">
-            <div className="p-5 border-4 border-solid border-[#007033]">
+            <div className="p-5 bg-white border-4 border-solid border-[#007033]">
               <h2 className="mb-4 mx-auto font-semibold text-lg">
                 Danh mục sản phẩm
               </h2>
               <div className="flex flex-col gap-1 w-full max-h-80 text-[#333f48]">
-                <span className="p-2 bg-button text-[#ffffff]">
-                  Gạo trắng(gạo tẻ)
-                </span>
-                <span className="p-2">Gạo nếp</span>
-                <span className="p-2">Gạo lứt</span>
-                <span className="p-2">Gạo tấm</span>
-                <span className="p-2">Gạo hữu cơ</span>
-                <span className="p-2">Gạo mầm, hỗn hợp</span>
+                {typeData.length > 0 &&
+                  typeData.map((item) => (
+                    <span
+                      key={item.idType}
+                      className={`p-2 cursor-pointer ${
+                        selectedType === item.idType
+                          ? "bg-button text-[#ffffff]"
+                          : ""
+                      }`}
+                      onClick={() => handleChooseType(item.idType)}
+                    >
+                      {item.nameType}
+                    </span>
+                  ))}
               </div>
             </div>
             <div className="mt-5 p-5">
               <h2 className="font-semibold text-lg mb-3">Lọc giá</h2>
               <div className="">
-                <RadioGroup onValueChange={handlePriceRangeChange}>
+                <RadioGroup
+                  value={selectedPriceRange}
+                  onValueChange={handlePriceRangeChange}
+                >
                   <div className="flex flex-col gap-3">
                     {priceRanges.map(({ id, label, range }) => (
                       <div key={id} className="flex items-center space-x-2 ">
@@ -145,9 +192,9 @@ const ProductPage = ({ type = "products" }) => {
               </div>
             </RadioGroup>
             <div className="grid grid-cols-4 gap-5">
-              {sortedProducts.length > 0 ? (
-                sortedProducts.map((item) => (
-                  <ProductCard key={item.id} item={item}></ProductCard>
+              {currentProductsData.length > 0 ? (
+                currentProductsData.map((item, index) => (
+                  <ProductCard key={index} item={item}></ProductCard>
                 ))
               ) : (
                 <div>No products available</div>
@@ -158,6 +205,7 @@ const ProductPage = ({ type = "products" }) => {
       </div>
       <div className="mb-10">
         <PaginationDemo
+          PerPage={newsPerPage}
           dataBase={sortedProducts}
           currentPage={currentPage}
           onPageChange={handlePageChange}

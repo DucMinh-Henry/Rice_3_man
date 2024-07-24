@@ -10,14 +10,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Link } from "react-router-dom";
-import { Cart } from "@/components/context/CartContext";
+import { CartData } from "@/components/context/CartContext";
 import IconMinus from "@/components/icons/IconMinus";
 import IconPlus from "@/components/icons/IconPlus";
 import IconAlert from "@/components/icons/IconAlert";
 
 const CartPage = () => {
   const [total, setTotal] = useState(0);
-  const { cart, setCart } = useContext(Cart);
+  const { cart, setCart } = CartData();
 
   const VNDDong = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -34,13 +34,19 @@ const CartPage = () => {
 
   const updateQuantity = (id, amount) => {
     setCart(
-      cart.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, (item.quantity || 1) + amount) }
-          : item
-      )
+      cart.map((item) => {
+        if (item.idProduct === id) {
+          return {
+            ...item,
+            quantity: Math.max(1, (item.quantity || 1) + amount),
+          };
+        }
+        return item;
+      })
     );
   };
+
+  // console.log(cart);
 
   return (
     <div className="page-container">
@@ -60,12 +66,18 @@ const CartPage = () => {
             <TableBody>
               {cart.length > 0 ? (
                 cart.map((item, index) => (
-                  <TableRow key={item.id} className="text-center">
+                  <TableRow key={index} className="text-center">
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
                       <div className="m-auto max-w-[200px]">
-                        <img src={item.url} alt={item.name} className="mb-3" />
-                        <span className="font-semibold">{item.name}</span>
+                        <img
+                          src={item.urlImage}
+                          alt={item.name}
+                          className="mb-3"
+                        />
+                        <span className="font-semibold">
+                          {item.nameProduct}
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell>
@@ -77,7 +89,7 @@ const CartPage = () => {
                       <div className="flex justify-center items-center m-auto w-[75px] border">
                         <div className="px-1 border-r cursor-pointer bg-[#f8f8f8]">
                           <IconMinus
-                            onClick={() => updateQuantity(item.id, -1)}
+                            onClick={() => updateQuantity(item.idProduct, -1)}
                             className="w-4"
                           />
                         </div>
@@ -86,7 +98,7 @@ const CartPage = () => {
                         </div>
                         <div className="px-1 border-l cursor-pointer bg-[#f8f8f8]">
                           <IconPlus
-                            onClick={() => updateQuantity(item.id, 1)}
+                            onClick={() => updateQuantity(item.idProduct, 1)}
                             className="w-4"
                           />
                         </div>
@@ -105,7 +117,9 @@ const CartPage = () => {
                         kind="button"
                         className="flex items-center justify-center font-semibold p-1 bg-[#007033] hover:bg-[#fdc97d] hover:text-[#007033]"
                         onClick={() => {
-                          setCart(cart.filter((c) => c.id !== item.id));
+                          setCart(
+                            cart.filter((c) => c.idProduct !== item.idProduct)
+                          );
                         }}
                       >
                         <span className="px-1 border border-solid border-white hover:border-[#007033]">
@@ -178,7 +192,6 @@ const CartPage = () => {
                 <Button
                   type="button"
                   kind="button"
-                  href="/payment"
                   className="flex items-center justify-center p-1 bg-[#007033] hover:bg-[#fdc97d] hover:text-[#007033]"
                 >
                   <span className="px-4 border border-solid border-white hover:border-[#007033] leading-10">

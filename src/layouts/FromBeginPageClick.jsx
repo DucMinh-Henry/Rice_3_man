@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import IconBeginningPage from "@/components/icons/IconBeginningPage";
+import { Link } from "react-router-dom";
 
 const FromBeginPageClick = () => {
   const [showButton, setShowButton] = useState(false);
@@ -35,21 +36,19 @@ const FromBeginPageClick = () => {
   };
 
   return (
-    <div className="">
-      <a
-        href="#"
-        className={`back-top ${showButton ? "visible" : "hidden"}`}
-        onClick={handleClick}
-      >
-        <div className="beginning-page">
-          <IconBeginningPage
-            className={
-              "text-center w-full h-full bg-[#007033] text-white hover:bg-[#fdc97d]"
-            }
-          ></IconBeginningPage>
-        </div>
-      </a>
-    </div>
+    <Link
+      href="#"
+      className={`back-top ${showButton ? "visible" : "hidden"}`}
+      onClick={handleClick}
+    >
+      <div className="beginning-page">
+        <IconBeginningPage
+          className={
+            "text-center w-full h-full bg-[#007033] text-white hover:bg-[#fdc97d]"
+          }
+        ></IconBeginningPage>
+      </div>
+    </Link>
   );
 };
 

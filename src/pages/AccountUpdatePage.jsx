@@ -1,62 +1,42 @@
-import useToggleValue from "@/hooks/useToggleValue";
-import FormGroup from "@/components/common/FormGroup";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input } from "@/components/input";
-import { Label } from "@/components/label";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import useToggleValue from "@/hooks/useToggleValue";
+import FormGroup from "@/components/common/FormGroup";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import IconEyeToggle from "@/components/icons/IconEyeToggle";
-import Button from "@/components/button/Button";
+// import { authUpdatePassword } from "@/store/auth/auth-slice";
 
 const schema = yup.object({
-  password: yup
+  currentPassword: yup.string().required("Trường này là bắt buộc"),
+  newPassword: yup
     .string()
     .required("Trường này là bắt buộc")
     .min(8, "Mật khẩu phải hơn 8 ký tự"),
   confirmPassword: yup
     .string()
     .required("Trường này là bắt buộc")
-    .oneOf([yup.ref("password"), null], "Mật khẩu không khớp"),
+    .oneOf([yup.ref("newPassword"), null], "Mật khẩu không khớp"),
 });
 
 const AccountUpdatePage = () => {
-  // handle confirm password
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(true);
-
+  const { user } = useSelector((state) => state.auth);
+  const accessToken = useSelector((state) => state.auth.accessToken);
   const dispatch = useDispatch();
 
   const {
     handleSubmit,
     control,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
   });
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const { value } = e.target;
-    setConfirmPassword(value);
-    setPasswordMatch(value === password);
-  };
-  const handleSignUp = async (values) => {
-    try {
-      dispatch(authRegister({ ...values, permissions: [] }));
-      reset({});
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const {
     value: showCurrentPassword,
@@ -68,6 +48,19 @@ const AccountUpdatePage = () => {
     value: showConfirmPassword,
     handleToggleValue: handleToggleConfirmPassword,
   } = useToggleValue();
+
+  // const onSubmit = (data) => {
+  //   const { currentPassword, newPassword } = data;
+  //   dispatch(
+  //     authUpdatePassword({
+  //       currentPassword,
+  //       newPassword,
+  //       idUser: user.id,
+  //       token: accessToken,
+  //     })
+  //   );
+  // };
+
   return (
     <div className="page-container flex justify-center items-center mb-10">
       <div className="w-[80%] bg-white">
@@ -91,76 +84,85 @@ const AccountUpdatePage = () => {
             <span className="opacity-50">Xóa tài khoản</span>
           </Link>
         </div>
-        <div className="w-[600px] p-5 mx-auto">
+        <form
+          className="w-[600px] p-5 mx-auto"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <span className="text-text3">
-            Chúng tôi không bao giờ yêu cấu cung cấp mật khẩu. Vui lòng không
+            Chúng tôi không bao giờ yêu cầu cung cấp mật khẩu. Vui lòng không
             chia sẻ với người khác.
           </span>
           <FormGroup>
-            <Label htmlFor="password">Mật khẩu hiện tại *</Label>
-            <Input
-              control={control}
-              name="password"
-              type={`${showCurrentPassword ? "text" : "password"}`}
-              placeholder="mật khẩu"
-              error={errors.password?.message}
-            >
-              <IconEyeToggle
-                open={showCurrentPassword}
-                onClick={handleToggleCurrentPassword}
-              ></IconEyeToggle>
-            </Input>
+            <Label htmlFor="currentPassword">Mật khẩu hiện tại *</Label>
+            <div className="relative">
+              <Input
+                control={control}
+                name="currentPassword"
+                type={showCurrentPassword ? "text" : "password"}
+                placeholder="Mật khẩu hiện tại"
+              ></Input>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer">
+                <IconEyeToggle
+                  onClick={handleTogglePassword}
+                  open={showPassword}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                />
+              </div>
+            </div>
+            {errors.currentPassword && <p>{errors.currentPassword.message}</p>}
           </FormGroup>
           <FormGroup>
             <Label htmlFor="newPassword">Mật khẩu mới *</Label>
-            <Input
-              control={control}
-              name="newPassword"
-              type={`${showPassword ? "text" : "password"}`}
-              placeholder="Tạo mật khẩu"
-              value={password}
-              onChange={handlePasswordChange}
-              error={errors.password?.message}
-            >
-              <IconEyeToggle
-                open={showPassword}
-                onClick={handleTogglePassword}
-              ></IconEyeToggle>
-            </Input>
+            <div className="relative">
+              <Input
+                control={control}
+                name="newPassword"
+                type={showPassword ? "text" : "password"}
+                placeholder="Mật khẩu mới"
+              ></Input>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer">
+                <IconEyeToggle
+                  onClick={handleTogglePassword}
+                  open={showPassword}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                />
+              </div>
+            </div>
+            {errors.newPassword && <p>{errors.newPassword.message}</p>}
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="connfirmPassword">Nhập lại mật khẩu *</Label>
-            <Input
-              control={control}
-              name="confirmPassword"
-              type={`${showConfirmPassword ? "text" : "password"}`}
-              placeholder="Nhập lại mật khẩu"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              error={
-                !passwordMatch
-                  ? "Mật khẩu không khớp"
-                  : errors.confirmPassword?.message
-              }
-            >
-              <IconEyeToggle
-                open={showConfirmPassword}
-                onClick={handleToggleConfirmPassword}
-              ></IconEyeToggle>
-            </Input>
+            <Label htmlFor="confirmPassword">Nhập lại mật khẩu *</Label>
+            <div className="relative">
+              <Input
+                control={control}
+                name="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Nhập lại mật khẩu"
+              ></Input>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer">
+                <IconEyeToggle
+                  onClick={handleTogglePassword}
+                  open={showPassword}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                />
+              </div>
+              {errors.confirmPassword && (
+                <p>{errors.confirmPassword.message}</p>
+              )}
+            </div>
           </FormGroup>
           <div className="flex items-center justify-center gap-3 w-full">
             <Button
-              type="button"
+              type="submit"
               kind="button"
-              className="flex items-center justify-center text-lg font-semibold p-1 bg-[#053024] hover:bg-[#fdc97d] hover:text-[#053024]"
+              className="flex items-center justify-center text-lg font-semibold"
             >
               <span className="px-10 py-1 border border-solid border-white hover:border-[#053024]">
                 Lưu
               </span>
             </Button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

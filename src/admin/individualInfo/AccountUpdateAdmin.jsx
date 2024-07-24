@@ -3,8 +3,8 @@ import FormGroup from "@/components/common/FormGroup";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input } from "@/components/input";
-import { Label } from "@/components/label";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -70,7 +70,7 @@ const AccountUpdateAdmin = () => {
   } = useToggleValue();
   return (
     <div className="grid col-start-3 col-end-11 mt-5">
-      <div className="bg-white rounded-lg">
+      <div className="bg-white rounded-lg p-5">
         <div className="flex text-2xl text-center mb-10">
           <Link
             className="w-full py-2 px-5 border-b rounded-t-md"

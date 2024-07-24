@@ -1,6 +1,5 @@
 import axios from "@/api/axios";
 
-
 export const requestAuthRegister = (data) => {
   return axios.post("/auth/register", {
     ...data,
@@ -30,3 +29,11 @@ export const requestAuthRefreshToken = (token) => {
     refreshToken: token,
   });
 };
+
+// export const requestAuthUpdatePassword = (data, token) => {
+//   return axios.put("/user/update-password", data, {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+// };

@@ -22,7 +22,7 @@ import AccountDeletePage from "./pages/AccountDeletePage";
 import PaymentPage from "./pages/PaymentPage";
 
 // Admin Pages
-import DashboardPage from "./admin/pages/DashboardPage";
+import DashboardPage from "./admin/dashboard/DashboardPage";
 import ProductTypePage from "./admin/productType/ProductTypePage";
 import AccountPage from "./admin/account/AccountPage";
 import BrandPage from "./admin/brand/BrandPage";

@@ -1,18 +1,14 @@
 import Button from "@/components/button/Button";
-import { Cart } from "@/components/context/CartContext";
+import { CartData } from "@/components/context/CartContext";
 import IconBack from "@/components/icons/IconBack";
 import IconLogo from "@/components/icons/IconLogo";
-import { Label } from "@/components/label";
-import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { TableRow } from "@/components/ui/table";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const PaymentPage = () => {
-  const { cart } = useContext(Cart);
-  const [country, setCountry] = useState("");
-  const [region, setRegion] = useState("");
+  const { cart } = CartData();
   const [total, setTotal] = useState(0);
   console.log(cart);
 
@@ -28,6 +24,7 @@ const PaymentPage = () => {
     });
     setTotal(totalPrice);
   }, [cart]);
+  console.log(totalPrice);
 
   return (
     <div className="page-container grid gap-5 py-5 grid-cols-10">
@@ -39,34 +36,37 @@ const PaymentPage = () => {
           Thông tin nhận hàng
         </h2>
         <div className="mb-5">
-          <Label>Email</Label>
-          <Input type="email" placeholder="" className="mt-2" />
+          <label className="">Email</label>
+          <input
+            type="email"
+            placeholder="Nhập email"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
         </div>
         <div className="mb-5">
-          <Label>Họ tên</Label>
-          <Input type="text" placeholder="" className="mt-2" />
+          <label className="">Họ tên</label>
+          <input
+            type="text"
+            placeholder="Nhập họ tên"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
         </div>
         <div className="mb-5">
-          <Label>Số điện thoại</Label>
-          <Input type="number" placeholder="" className="mt-2" />
+          <label className="">Số điện thoại</label>
+          <input
+            type="number"
+            placeholder="Nhập số điện thoại"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
         </div>
         <div className="mb-5">
-          <Label>Địa chỉ</Label>
-          <Input type="text" placeholder="" className="mt-2" />
+          <label className="">Địa chỉ</label>
+          <input
+            type="text"
+            placeholder="nhập địa chỉ"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
         </div>
-        {/* <div className="mb-5">
-          <div>
-            <CountryDropdown
-              value={country}
-              onChange={(val) => setCountry(val)}
-            />
-            <RegionDropdown
-              country={country}
-              value={region}
-              onChange={(val) => setRegion(val)}
-            />
-          </div>
-        </div> */}
         <h2 className="text-lg font-medium my-10 text-[#053024]">Thanh toán</h2>
         <RadioGroup defaultValue="1" className="flex gap-5">
           <div className="flex items-center space-x-2">
@@ -90,13 +90,13 @@ const PaymentPage = () => {
             {cart.length > 0 ? (
               cart.map((item) => (
                 <TableRow>
-                  <div className="flex justify-between items-center">
+                  <div className="flex gap-5 items-center">
                     <img
-                      src={item.url}
+                      src={item.urlImage}
                       alt=""
                       className="w-20 h-20 rounded-md"
                     />
-                    <span className="w-72 leading-7">{item.name}</span>
+                    <span className="w-72 leading-7">{item.nameProduct}</span>
                     <span>
                       {VNDDong.format(
                         item.quantity ? item.price * item.quantity : item.price

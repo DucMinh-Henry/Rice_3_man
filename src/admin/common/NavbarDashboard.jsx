@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 
 const NavbarDashboard = () => {
   return (
-    <div className="grid col-start-1 col-end-3 w-full h-screen border-x-4  border-b-4 border-solid border-[#053024] p-5">
+    <div className="grid col-start-1 col-end-3 w-full h-screen border-x-4  border-b-4 border-solid bg-white border-button p-5">
       <div className="rounded-md flex flex-col ">
         <NavLink
           to={"/admin/dashboard"}

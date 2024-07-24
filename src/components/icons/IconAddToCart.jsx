@@ -1,6 +1,6 @@
 import React from "react";
 
-const IconAddToCart = ({ onClick = () => {} }) => {
+const IconAddToCart = ({ onClick = () => {}, className }) => {
   return (
     <svg
       width="39"
@@ -9,6 +9,7 @@ const IconAddToCart = ({ onClick = () => {} }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}
+      className={className}
     >
       <g id="&#240;&#159;&#166;&#134; icon &#34;Add to Shopping Cart&#34;">
         <path

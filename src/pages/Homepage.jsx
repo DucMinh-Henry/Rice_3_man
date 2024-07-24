@@ -1,12 +1,12 @@
 import React from "react";
 import "swiper/scss";
-import ProductList from "../components/product/ProductList";
 import PostList from "../components/posts/PostList";
 import TrademarkList from "../components/trademark/TrademarkList";
 import IconDelivery from "public/svg/ck1.svg";
 import IconFree from "public/svg/ck2.svg";
 import IconReputation from "public/svg/ck3.svg";
 import IconTeam from "public/svg/ck4.svg";
+import ProductList from "@/components/product/ProductList";
 
 const HomePage = () => {
   return (

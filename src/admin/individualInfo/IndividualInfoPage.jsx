@@ -1,7 +1,7 @@
-import Button from "@/components/button/Button";
 import FormGroup from "@/components/common/FormGroup";
-import Input from "@/components/input/input";
-import { Label } from "@/components/label";
+import {Button} from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const IndividualInfoPage = ({ user }) => {
   };
   return (
     <div className="grid col-start-3 col-end-11 mt-5">
-      <div className="bg-white rounded-lg">
+      <div className="bg-white rounded-lg p-5">
         <div className="flex text-2xl text-center mb-10">
           <Link
             className="w-full py-2 px-5 border border-b-transparent rounded-t-md"
